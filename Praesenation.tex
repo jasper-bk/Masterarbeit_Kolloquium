@@ -1,0 +1,432 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass[10pt, aspectratio=169]{beamer} %im 16 zu 9 Format
+%\documentclass{beamer} %im 4 zu 3 Format
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}       %gefällt mir vom Stil gut, ist aber nicht klassisch
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+\usetheme{Madrid}     %klassischer Stil, aber nichts besonderes
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{pdfpcnotes}
+\usepackage{listings}
+\usepackage[ngerman]{babel}
+\usepackage[ngerman]{datetime}
+\usepackage[T1]{fontenc} %Damit Umlaute auch beim Kopieren richtig dargestellt werden
+\usepackage{csquotes}
+
+\usepackage{color}
+
+\usepackage{pgfgantt} %GANT Diagramm
+
+% Farbdefinitionen
+\definecolor{myblue}{RGB}{0, 51, 102}
+\definecolor{myorange}{RGB}{255, 102, 0}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.arrows}
+
+\tikzset{
+    myarrow/.style={
+        draw,
+        fill=orange,
+        single arrow,
+        minimum height=9ex,
+        single arrow head extend=1ex
+    }
+}
+
+\newcommand{\arrowright}{%
+\tikz [baseline=-0.5ex]{\node [myarrow,rotate=0] {};}
+}
+\newcommand{\arrowleft}{%
+\tikz [baseline=-0.5ex]{\node [myarrow,rotate=180] {};}
+}
+
+%extra blocks
+
+\newenvironment<>{extrablock}[1]{%
+\setbeamercolor{block title}{bg=orange!90!black}%
+  \begin{block}#2{#1}}{\end{block}}
+
+\renewcommand{\figurename}{Abbildung}
+
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  escapeinside = {(*@}{@*)},
+  numbers=left,
+  xleftmargin=2.5em,
+  frame=single,
+  breaklines=true,
+}
+
+%Für Zeilenänderungen
+\let\origthelstnumber\thelstnumber
+\makeatletter
+\renewcommand\thelstnumber{%
+    \ifnum\value{lstnumber}>0
+        \origthelstnumber
+    \else
+        \ifnum\value{lstnumber}=-1
+            \ldots
+        \fi
+    \fi
+}
+
+% for starting line numbers
+\newcommand*\startnumber[1]{%
+    \setcounter{lstnumber}{\numexpr#1-1\relax}%
+}
+
+% for stopping line numbers
+\newcommand*\stopnumber{%
+    \startnumber{-2}%
+}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Kolloquium]{Entwicklung eines KI-basierten Assistenzsystems mit transparenter Entscheidungsbegründung zur quantitativen Portfoliooptimierung im Wertpapierhandel} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author{Jasper Bremenkamp} % Your name
+\institute[IU] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+IU Internationale Hochschule \\ % Your institution for the title page
+\medskip
+\textit{jasper.bremenkamp@iu-study.org}\\ % Your email address
+https://jasper.bremenkamp.de
+}
+\date{31. Oktober 2025} % Date, can be changed to a custom date
+
+\begin{document}
+
+\begin{frame}
+    \titlepage % Print the title page as the first slide
+
+    \pnote{Herzlich willkommen zur Präsentation meiner Masterarbeit „Entwicklung eines KI-basierten Assistenzsystems mit transparenter Entscheidungsbegründung zur quantitativen Portfoliooptimierung im Wertpapierhandel“.}
+    \pnote{Ich bin Jasper Bremenkamp, Datum: 31. Oktober 2025.}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Agenda}
+    \tableofcontents
+
+    \pnote{0-5}
+    \pnote{0. Agenda: Einleitung, Problemstellung, Ergebnisse, technische Umsetzung, Zusammenfassung mit Vorteilen \& Grenzen.}
+    \pnote{1. Warum transparente Entscheidungsbegründung im Wertpapierhandel wichtig ist und Zielbild der Arbeit.}
+    \pnote{2. Welche Lücken heutige Systeme haben (Erklärungsdefizit, Portfolio-Integration, Regulatorik).}
+    \pnote{3. Was der Prototyp zeigt: Kopplung von Signalen \& Begründungen, Portfoliosicht, Evaluation.}
+    \pnote{4. Wie die Lösung gebaut ist: modular, austauschbare LLM-Schicht, Daten, Frontend.}
+    \pnote{5. Takeaways: Nutzen, aber auch Grenzen \& Ausblick.}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+\section{Einleitung}
+\begin{frame}{Einleitung}
+\begin{columns}
+    \column{0.5\textwidth}
+
+    \begin{itemize}
+        \item Blackbox-Charakter vieler (Robo-)Advisor: geringe Nachvollziehbarkeit \(\rightarrow\) wenig Vertrauen.
+        \item Bedarf nach Transparenz und Erklärbarkeit
+        \item Regulatorische Transparenzanforderungen (z.\,B. MiFID II).
+    \end{itemize}
+
+    \vspace*{0.5cm}
+
+    \begin{itemize}
+        \item Kopplung \emph{prozentualer} Handlungsempfehlungen (K/V/H) mit \emph{natürlichen Erklärungen}
+        \item Aggregation zu \emph{Portfoliosicht}
+        \item Interaktiver Chat für Rückfragen.
+        \item Fokus: \emph{Transparenz \& Reproduzierbarkeit}, nicht Autotrading.
+    \end{itemize}
+
+    \column{0.5\textwidth}
+    \begin{figure}
+        \includegraphics[scale=0.25]{assets/screenshot_frontend_einzelnes_wertpapier_chat.png}
+    \end{figure}
+    \vspace*{-0.5cm}
+    \scalebox{.4}{Ausschnitt aus Anwendung (Quelle: Eigene Darstellung)}
+
+    \pnote{1-X}
+    \pnote{Kernidee: strukturierte Signale + verständliche Begründungen; Portfoliosicht als „zweite Meinung“ zur Plausibilisierung.}
+\end{columns}
+\end{frame}
+
+\section{Problemstellung}
+\begin{frame}{Problemstellung}
+
+    \begin{enumerate}
+        \item \textbf{Erklärungsdefizit bei Einzelwert-Empfehlungen}
+        \begin{itemize}
+            \item K/V/H-Signale häufig ohne Kontext (z.\,B. Margen, ESG, Lieferkettenrisiken).
+            \item LLMs generieren plausible, aber teils inkonsistente Begründungen.
+        \end{itemize}
+
+        \item \textbf{Portfolio-Dilemma \& Nutzerzentrierung}
+        \begin{itemize}
+            \item Fehlende risikoadaptive \emph{Integration} von Einzelanalysen (Korrelationen, Diversifikation).
+            \item Unzureichende Ausrichtung an Zielen/Präferenzen \& Transparenzvorgaben.
+        \end{itemize}
+    \end{enumerate}
+
+    \arrowright \ Transparentes, reproduzierbares Assistenzsystem mit klaren Schnittstellen, das Signale, Begründungen und Portfoliosicht verknüpft.
+
+    \pnote{0-5}
+    \pnote{0. Problem dreiteilig: Intransparenz, Portfoliobezug, Regulatorik/Nutzerfokus.}
+    \pnote{Zeigen, dass Architektur diese Lücken gezielt adressiert.}
+\end{frame}
+
+\section{Ergebnisse}
+\begin{frame}{Ergebnisse}
+
+    \begin{alertblock}{Kernaussagen}
+        \begin{itemize}
+            \item Kopplung strukturierter Signale mit Begründungen ist technisch tragfähig.
+            \item Portfoliosicht unterstützt \emph{verständliche} Zweitbewertung und Rebalancing-Hinweise.
+            \item Modulare Architektur fördert Austauschbarkeit \& Reproduzierbarkeit.
+        \end{itemize}
+    \end{alertblock}
+
+    \begin{exampleblock}{Evaluation (Auszug)}
+        \begin{itemize}
+            \item \emph{Konsistenztests} der LLM-Ausgaben über Iterationen/Modelle.
+            \item \emph{Vergleich} der Tendenzen mit Analystenkonsens (orientierend, nicht normativ).
+            \item Backtesting: konzeptionell verortet, aus Umfangsgründen nicht durchgeführt.
+        \end{itemize}
+    \end{exampleblock}
+
+    \begin{extrablock}{Implikationen}
+        \begin{itemize}
+            \item Transparente Argumente erhöhen Validierbarkeit und Nutzervertrauen.
+            \item Grundlage für größere, unabhängige Realwelt-Validierungen \& A/B-Studien.
+        \end{itemize}
+    \end{extrablock}
+
+    \pnote{1-4}
+    \pnote{Wichtig: Transparenz \& Reproduzierbarkeit als übergreifende Qualitätsmerkmale.}
+\end{frame}
+
+\begin{frame}{Ergebnisse (Fortsetzung)}
+
+    \begin{block}{Portfoliosicht \& Rebalancing}
+        \begin{itemize}
+            \item Aggregation von Einzel-Empfehlungen zu risikoadaptiver Gesamtstrategie.
+            \item Korrelationen/Diversifikation berücksichtigt; Hinweise auf Zielabweichungen.
+        \end{itemize}
+    \end{block}
+
+    \begin{exampleblock}{Beispiel: Konsistenzprüfung}
+        \begin{itemize}
+            \item Mehrfachläufe gleicher Prompts; Variation nach Modell/Parameter sichtbar.
+            \item Maßnahmen: striktere Schemas (Pydantic), JSON-Extraktion, Prompt-Checks.
+        \end{itemize}
+    \end{exampleblock}
+
+    \begin{alertblock}{Limitationen der Evaluation}
+        \begin{itemize}
+            \item Keine Backtests im Prototypumfang; desk-basierte Verfahren dominieren.
+            \item LLM-Stochastik \& Datenaktualität bleiben kritische Faktoren.
+        \end{itemize}
+    \end{alertblock}
+
+    \pnote{1-X}
+    \pnote{Rahmen für weiterführende Tests skizzieren (Backtesting, Nutzerstudien).}
+\end{frame}
+
+\section{Technische Umsetzung}
+\begin{frame}{Technische Umsetzung}
+
+    \begin{columns}
+        \column{0.4\textwidth}
+            \begin{figure}
+                \includegraphics[scale=0.2]{assets/vereinfachte_systemarchitektur.jpg}
+            \end{figure}
+            \vspace*{-0.5cm}
+            \scalebox{.4}{Architekturübersicht (Quelle: Eigene Darstellung)}
+
+        \column{0.6\textwidth}
+        \begin{itemize}
+            \item \textbf{Backend (Flask):}
+            \begin{itemize}
+                \item HTTP/JSON-APIs; Orchestrierung von LLM \& Finanzdaten.
+            \end{itemize}
+
+            \item \textbf{LLM-Schicht (austauschbar):}
+            \begin{itemize}
+                \item Lokal via Ollama; optional externe Anbieter per API.
+                \item LangChain für Ketten/Tools; strikte JSON-Outputs (Pydantic).
+            \end{itemize}
+
+            \item \textbf{Finanzdaten:}
+            \begin{itemize}
+                \item yfinance/Finnhub; Kombination quant./qual. Faktoren.
+            \end{itemize}
+
+            \item \textbf{Frontend (leichtgewichtig):}
+            \begin{itemize}
+                \item HTML/Bootstrap/jQuery; asynchrone API-Calls; Chat-Interaktion.
+            \end{itemize}
+        \end{itemize}
+    \end{columns}
+
+    \pnote{0-4}
+    \pnote{Modularität = Austauschbarkeit (Modelle/Daten), Reproduzierbarkeit = klare Schnittstellen \& Logs.}
+\end{frame}
+
+\begin{frame}{Technische Umsetzung (Fortsetzung)}
+
+    \begin{block}{Prompts \& Schemata}
+        \begin{itemize}
+            \item Asset-Bewertungsprompt \& Portfolio-Zusammenfassungsprompt.
+            \item Strukturausgaben (JSON) mit Validierung zur Konsistenzsicherung.
+        \end{itemize}
+    \end{block}
+
+    \begin{exampleblock}{Entwicklungs- \& Betriebsaspekte}
+        \begin{itemize}
+            \item Iterative Verbesserung; Jupyter-Lab für Experimente.
+            \item Monitoring von Latenzen; Debugging-Tools; Deployment-Szenarien.
+        \end{itemize}
+    \end{exampleblock}
+
+    \pnote{1-4}
+    \pnote{Hervorheben: klare Projektstruktur, nachvollziehbare Artefakte, Erweiterbarkeit.}
+\end{frame}
+
+\section{Zusammenfassung, Vorteile und Grenzen}
+\begin{frame}{Zusammenfassung, Vorteile und Grenzen der Arbeit}
+
+    \begin{itemize}
+        \item \textbf{Grundprinzipien:}
+        \begin{itemize}
+            \item Verknüpfung aus \emph{quantitativen Signalen} und \emph{sprachlichen Erklärungen}.
+            \item Risikoadaptive \emph{Portfoliosicht} \& Rebalancing-Empfehlungen.
+            \item \emph{Modular} \& \emph{reproduzierbar} durch klare Schnittstellen.
+        \end{itemize}
+
+        \item \textbf{Vorteile:}
+        \begin{itemize}
+            \item Höhere Nachvollziehbarkeit, bessere Plausibilisierung bestehender Einschätzungen.
+            \item Austauschbare LLM- \& Daten-Layer, wissenschaftlich saubere Evaluationspfade.
+            \item Interaktiver Chat für Nutzerfragen \(\rightarrow\) Nutzerzentrierung.
+        \end{itemize}
+
+        \item \textbf{Grenzen:}
+        \begin{itemize}
+            \item Keine Backtests im Prototyp; LLM-Stochastik \& Datenqualität kritisch.
+            \item Noch ausstehende \emph{großskalige} Realwelt-Validierungen \& Nutzerstudien.
+        \end{itemize}
+    \end{itemize}
+
+    \pnote{1-4}
+    \pnote{Takeaway: tragfähiges Konzept mit klaren nächsten Schritten (Backtesting, A/B-Tests, Skalierung).}
+\end{frame}
+
+\section{Referenzen}
+\begin{frame}{Referenzen}
+
+    \footnotesize{
+    \begin{thebibliography}{99}
+
+        \bibitem[Bremenkamp, 2025]{bremenkamp2025}
+        J. Bremenkamp (2025).
+        \newblock \emph{Entwicklung eines KI-basierten Assistenzsystems mit transparenter Entscheidungsbegründung
+        zur quantitativen Portfoliooptimierung im Wertpapierhandel.}
+        Masterarbeit, IU Internationale Hochschule.
+
+        % ggf noch mehr Quellen
+
+    \end{thebibliography}
+    }
+
+    \pnote{1-2}
+    \pnote{Aus Zeitgründen nur repräsentative Quellen. Danke für die Aufmerksamkeit!}
+\end{frame}
+
+\end{document}
+
+% To-Dos:
+% 15min gut erreichbar
+% Notizen weniger stark als Duplikat zur Folie
+    % Bezug zur Folie soll existieren, abes es soll nicht einfach runter gebetet werden.
+    % Unabhängiges Vortragen mit erkennbarem Bezug zu Folien
+        % vorher: schlechte Überleitung, wenn man über alle Punkte geht
+        % auf Punkte nich zu genau eingehen und sie einfach als solche stehen lassen

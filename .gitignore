@@ -1,0 +1,14 @@
+*.log
+*.aux
+*.gz
+*.nav
+*.snm
+*.bbl
+*.out
+*.toc
+*.fdb_latexmk
+*.lot
+*.lof
+*.blg
+*.fls
+**/.ipynb_checkpoints/
