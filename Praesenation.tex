@@ -185,24 +185,22 @@ https://jasper.bremenkamp.de
 \begin{frame}
     \titlepage % Print the title page as the first slide
 
-    \pnote{Herzlich willkommen zur Präsentation meiner Masterarbeit „Entwicklung eines KI-basierten Assistenzsystems mit transparenter Entscheidungsbegründung zur quantitativen Portfoliooptimierung im Wertpapierhandel“.}
+    \pnote{Herzlich willkommen zur Präsentation meiner Masterarbeit [Titel].}
     \pnote{Ich bin Jasper Bremenkamp, Datum: 31. Oktober 2025.}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Agenda}
-    \tableofcontents
+  \frametitle{Agenda}
+  \tableofcontents
 
-    \pnote{Kurzer Überblick: Motivation \& Problem, Methode/DSR, Umsetzung/Architektur, Evaluation/Ergebnisse, Fazit \& Ausblick.}
-
-    % Notes hier noch anpassen
-    \pnote{0-5}
-    \pnote{0. Agenda: Einleitung, Problemstellung, Ergebnisse, technische Umsetzung, Zusammenfassung mit Vorteilen \& Grenzen.}
-    \pnote{1. Warum transparente Entscheidungsbegründung im Wertpapierhandel wichtig ist und Zielbild der Arbeit.}
-    \pnote{2. Welche Lücken heutige Systeme haben (Erklärungsdefizit, Portfolio-Integration, Regulatorik).}
-    \pnote{3. Was der Prototyp zeigt: Kopplung von Signalen \& Begründungen, Portfoliosicht, Evaluation.}
-    \pnote{4. Wie die Lösung gebaut ist: modular, austauschbare LLM-Schicht, Daten, Frontend.}
-    \pnote{5. Takeaways: Nutzen, aber auch Grenzen \& Ausblick.}
+  % Notes hier noch anpassen
+  \pnote{0-5}
+  \pnote{0. Agenda: Einleitung, Problemstellung, Ergebnisse, technische Umsetzung, Zusammenfassung mit Vorteilen \& Grenzen.}
+  \pnote{1. Warum transparente Entscheidungsbegründung im Wertpapierhandel wichtig ist und Zielbild der Arbeit.}
+  \pnote{2. Welche Lücken heutige Systeme haben (Erklärungsdefizit, Portfolio-Integration, Regulatorik).}
+  \pnote{3. Was der Prototyp zeigt: Kopplung von Signalen \& Begründungen, Portfoliosicht, Evaluation.}
+  \pnote{4. Wie die Lösung gebaut ist: modular, austauschbare LLM-Schicht, Daten, Frontend.}
+  \pnote{5. Takeaways: Nutzen, aber auch Grenzen \& Ausblick.}
 \end{frame}
 
 %----------------------------------------------------------------------------------------
@@ -230,22 +228,22 @@ https://jasper.bremenkamp.de
     \vspace{0.1cm}
     \textbf{Abgrenzung}
     \begin{itemize}
-      \item Entscheidungs\emph{unterstützung}, kein autonomer Trader; Fokus auf Transparenz statt Prognosegenauigkeit.
+      \item Entscheidungs\emph{unterstützung}, kein autonomer Trader, Fokus auf Transparenz statt Prognosegenauigkeit.
     \end{itemize}
     \column{0.4\textwidth}
     \begin{figure}
       \includegraphics[width=\linewidth]{assets/screenshot_frontend_einzelnes_wertpapier_chat.png}
       \caption{Ausschnitt aus Anwendung (Quelle: Eigene Darstellung)}
     \end{figure}
-
-    % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
-    % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
-    \pnote{1-X}
-    \pnote{1. ...}
-    \pnote{2. ...}
-    \pnote{... ...}
-
   \end{columns}
+
+  % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
+  % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
+  \pnote{1-X}
+  \pnote{1. ...}
+  \pnote{2. ...}
+  \pnote{... ...}
+
 \end{frame}
 
 %--------------------------------
@@ -307,22 +305,22 @@ https://jasper.bremenkamp.de
       \item Abgleich mit Analystenkonsens (Trend/Richtung als Orientierung).
       \item Backtesting: \emph{konzeptionell eingeordnet}, nicht durchgeführt (Scope).
     \end{itemize}
-
-
-    % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
-    % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
-    \pnote{1-X}
-    \pnote{1. ...}
-    \pnote{2. ...}
-    \pnote{... ...}
-
   \end{columns}
+
+
+  % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
+  % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
+  \pnote{1-X}
+  \pnote{1. ...}
+  \pnote{2. ...}
+  \pnote{... ...}
+
 \end{frame}
 
 %--------------------------------
 \section{Technische Umsetzung}
 %--------------------------------
-\begin{frame}{Technische Umsetzung – Architektur \& Komponenten}
+\begin{frame}{Technische Umsetzung -- Architektur \& Komponenten}
   \begin{columns}
 
     \column{0.55\textwidth}
@@ -353,45 +351,109 @@ https://jasper.bremenkamp.de
       \item Prompt-Orchestrierung + Validierung
       \item Fokus: Reproduzierbarkeit \& Transparenz
     \end{itemize}
-
-    % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
-    % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
-    \pnote{1-X}
-    \pnote{1. ...}
-    \pnote{2. ...}
-    \pnote{... ...}
-
   \end{columns}
+
+  % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
+  % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
+  \pnote{1-X}
+  \pnote{1. ...}
+  \pnote{2. ...}
+  \pnote{... ...}
+
 \end{frame}
 
-\begin{frame}{Technische Umsetzung – Datenfluss}
-  \begin{block}{Pipeline-Skizze}
-    \begin{itemize}
-      \item \textbf{Input:} Portfolio \& Nutzerziele \textrightarrow{} Datenabruf (Markt/Fundamentals/News).
-      \item \textbf{LLM-Orchestrierung:} Strukturierte Signale + Prompting \textrightarrow{} \emph{begründete} Einzelbewertungen.
-      \item \textbf{Aggregation:} Risikoadaptive Portfoliosicht \textrightarrow{} Rebalancing-Hinweise.
-      \item \textbf{UI:} Visualisierung + Chat für Rückfragen/Erklärungen.
-    \end{itemize}
-  \end{block}
-  \begin{exampleblock}{Qualitätssicherung}
-    \begin{itemize}
-      \item JSON-Validierung (Pydantic), Konsistenzprüfungen, Logging/Monitoring.
-    \end{itemize}
-  \end{exampleblock}
+\begin{frame}{Technische Umsetzung -- Datenfluss}
+  \begin{columns}
 
-    % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
-    % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
-    \pnote{1-X}
-    \pnote{1. ...}
-    \pnote{2. ...}
-    \pnote{... ...}
+    \column{0.4\textwidth}
+
+    \begin{block}{Pipeline-Skizze}
+      \begin{itemize}
+        \item \textbf{Input:} Portfolio, Nutzerziele \& Datenabfrage zur Laufzeit
+        \item \textbf{LLM-Orchestrierung:} Strukturierte Prompts mit Validierung (Pydantic)
+        \item \textbf{Aggregation:} Gesamtheitliche Portfoliosicht
+        \item \textbf{UI \& Interaktivität:} anschließend Visualisierung + Chat für Rückfragen/Erklärungen.
+      \end{itemize}
+    \end{block}
+
+    \column{0.6\textwidth}
+
+    \vspace*{-0.5cm}
+
+    \begin{figure}
+        \includegraphics[width=0.9\linewidth]{assets/flowchart_evaluate_portfolio.png}
+        \caption{Flow-Chart allgemeiner Ablauf (Quelle: Eigene Darstellung)}
+    \end{figure}
+
+
+
+  \end{columns}
+
+  % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
+  % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
+  \pnote{1-X}
+  \pnote{1. ...}
+  \pnote{2. ...}
+  \pnote{... ...}
 
 \end{frame}
 
 %--------------------------------
 \section{Ergebnisse}
 %--------------------------------
-\begin{frame}{Ergebnisse – Kurzüberblick}
+
+
+\begin{frame}{Ergebnisse -- Anwendung (1/3)}
+
+    \begin{figure}
+      \includegraphics[width=0.7\linewidth]{assets/screenshot_frontend_nach_evaluierung.png}
+      \caption{Anwendung -- Übersicht nach Evaluierung (Quelle: Eigene Darstellung)}
+    \end{figure}
+
+  % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
+  % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
+  \pnote{1-X}
+  \pnote{1. ...}
+  \pnote{2. ...}
+  \pnote{... ...}
+
+\end{frame}
+
+
+\begin{frame}{Ergebnisse -- Anwendung (2/3)}
+
+    \begin{figure}
+      \includegraphics[width=0.7\linewidth]{assets/screenshot_frontend_settings.png}
+      \caption{Anwendung -- Einstellungen (Quelle: Eigene Darstellung)}
+    \end{figure}
+
+  % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
+  % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
+  \pnote{1-X}
+  \pnote{1. ...}
+  \pnote{2. ...}
+  \pnote{... ...}
+
+\end{frame}
+
+
+\begin{frame}{Ergebnisse -- Anwendung (3/3)}
+
+    \begin{figure}
+      \includegraphics[width=0.68\linewidth]{assets/screenshot_frontend_einzelnes_wertpapier_chat.png}
+      \caption{Anwendung -- Einzelansicht  (Quelle: Eigene Darstellung)}
+    \end{figure}
+
+  % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
+  % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
+  \pnote{1-X}
+  \pnote{1. ...}
+  \pnote{2. ...}
+  \pnote{... ...}
+
+\end{frame}
+
+\begin{frame}{Ergebnisse -- Analyse}
   \begin{alertblock}{Machbarkeit \& Nutzen}
     \begin{itemize}
       \item Kopplung strukturierter Signale mit natürlichsprachlichen Begründungen ist technisch tragfähig.
@@ -406,20 +468,21 @@ https://jasper.bremenkamp.de
   \end{exampleblock}
   \begin{block}{Nicht durchgeführt (Scope)}
     \begin{itemize}
-      \item Backtesting nur konzeptionell eingeordnet; größere Feldstudien stehen aus.
+      \item Backtesting nur konzeptionell eingeordnet
+      \item Größere Nutzerstudien mit Feedback mangels Kapazität nicht durchführbar
     \end{itemize}
   \end{block}
 
-    % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
-    % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
-    \pnote{1-X}
-    \pnote{1. ...}
-    \pnote{2. ...}
-    \pnote{... ...}
+  % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
+  % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
+  \pnote{1-X}
+  \pnote{1. ...}
+  \pnote{2. ...}
+  \pnote{... ...}
 
 \end{frame}
 
-\begin{frame}{Ergebnisse – Implikationen}
+\begin{frame}{Ergebnisse -- Implikationen}
   \begin{block}{Beitrag}
     \begin{itemize}
       \item Konsistentes Vorgehensmodell + modularer Prototyp als belastbare Basis für Erweiterungen/Piloten.
@@ -433,12 +496,12 @@ https://jasper.bremenkamp.de
     \end{itemize}
   \end{alertblock}
 
-    % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
-    % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
-    \pnote{1-X}
-    \pnote{1. ...}
-    \pnote{2. ...}
-    \pnote{... ...}
+  % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
+  % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
+  \pnote{1-X}
+  \pnote{1. ...}
+  \pnote{2. ...}
+  \pnote{... ...}
 
 \end{frame}
 
@@ -470,12 +533,12 @@ https://jasper.bremenkamp.de
       \end{itemize}
   \end{itemize}
 
-    % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
-    % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
-    \pnote{1-X}
-    \pnote{1. ...}
-    \pnote{2. ...}
-    \pnote{... ...}
+  % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
+  % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
+  \pnote{1-X}
+  \pnote{1. ...}
+  \pnote{2. ...}
+  \pnote{... ...}
 
 \end{frame}
 
@@ -495,12 +558,12 @@ https://jasper.bremenkamp.de
   \end{thebibliography}
   }
 
-    % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
-    % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
-    \pnote{1-X}
-    \pnote{1. ...}
-    \pnote{2. ...}
-    \pnote{... ...}
+  % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
+  % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
+  \pnote{1-X}
+  \pnote{1. ...}
+  \pnote{2. ...}
+  \pnote{... ...}
 
 \end{frame}
 
