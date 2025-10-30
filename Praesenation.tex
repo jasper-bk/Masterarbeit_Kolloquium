@@ -81,8 +81,8 @@
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
 \usepackage{pdfpcnotes}
 \usepackage{listings}
-\usepackage[ngerman]{babel}
 \usepackage[ngerman]{datetime}
+\usepackage[english, ngerman]{babel}
 \usepackage[T1]{fontenc} %Damit Umlaute auch beim Kopieren richtig dargestellt werden
 \usepackage{csquotes}
 
@@ -156,6 +156,14 @@
 }
 \makeatother
 
+\usepackage{caption}
+\captionsetup{
+  figurename=Abb.,
+  tablename=Tab.,
+  font=scriptsize,
+  labelfont=scriptsize
+}
+
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
@@ -185,6 +193,9 @@ https://jasper.bremenkamp.de
     \frametitle{Agenda}
     \tableofcontents
 
+    \pnote{Kurzer Überblick: Motivation \& Problem, Methode/DSR, Umsetzung/Architektur, Evaluation/Ergebnisse, Fazit \& Ausblick.}
+
+    % Notes hier noch anpassen
     \pnote{0-5}
     \pnote{0. Agenda: Einleitung, Problemstellung, Ergebnisse, technische Umsetzung, Zusammenfassung mit Vorteilen \& Grenzen.}
     \pnote{1. Warum transparente Entscheidungsbegründung im Wertpapierhandel wichtig ist und Zielbild der Arbeit.}
@@ -198,213 +209,282 @@ https://jasper.bremenkamp.de
 %	PRESENTATION SLIDES
 %----------------------------------------------------------------------------------------
 
+
+%--------------------------------
 \section{Einleitung}
+%--------------------------------
 \begin{frame}{Einleitung}
-\begin{columns}
-    \column{0.5\textwidth}
-
+  \begin{columns}
+    \column{0.6\textwidth}
+    \textbf{Motivation} \\
     \begin{itemize}
-        \item Blackbox-Charakter vieler (Robo-)Advisor: geringe Nachvollziehbarkeit \(\rightarrow\) wenig Vertrauen.
-        \item Bedarf nach Transparenz und Erklärbarkeit
-        \item Regulatorische Transparenzanforderungen (z.\,B. MiFID II).
+      \item Blackbox-Charakter vieler (teil-)automatisierter Systeme im Wertpapierhandel \textrightarrow{} fehlende Nachvollziehbarkeit, geringes Vertrauen.
+      \item Anlegerbedürfnis: transparente, begründete Handlungsempfehlungen statt bloßer Signale.
     \end{itemize}
-
-    \vspace*{0.5cm}
-
+    \vspace{0.1cm}
+    \textbf{Zielbild der Arbeit} \\
     \begin{itemize}
-        \item Kopplung \emph{prozentualer} Handlungsempfehlungen (K/V/H) mit \emph{natürlichen Erklärungen}
-        \item Aggregation zu \emph{Portfoliosicht}
-        \item Interaktiver Chat für Rückfragen.
-        \item Fokus: \emph{Transparenz \& Reproduzierbarkeit}, nicht Autotrading.
+      \item KI-Assistenzsystem, das \emph{prozentuale} Empfehlungen zu Einzelwerten mit \emph{natürlichen Begründungen} verknüpft.
+      \item Aggregation zu \emph{risikoadaptiver Portfoliosicht} mit Rebalancing-Hinweisen + interaktiver Chat.
     \end{itemize}
-
-    \column{0.5\textwidth}
+    \vspace{0.1cm}
+    \textbf{Abgrenzung}
+    \begin{itemize}
+      \item Entscheidungs\emph{unterstützung}, kein autonomer Trader; Fokus auf Transparenz statt Prognosegenauigkeit.
+    \end{itemize}
+    \column{0.4\textwidth}
     \begin{figure}
-        \includegraphics[scale=0.25]{assets/screenshot_frontend_einzelnes_wertpapier_chat.png}
+      \includegraphics[width=\linewidth]{assets/screenshot_frontend_einzelnes_wertpapier_chat.png}
+      \caption{Ausschnitt aus Anwendung (Quelle: Eigene Darstellung)}
     \end{figure}
-    \vspace*{-0.5cm}
-    \scalebox{.4}{Ausschnitt aus Anwendung (Quelle: Eigene Darstellung)}
 
+    % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
+    % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
     \pnote{1-X}
-    \pnote{Kernidee: strukturierte Signale + verständliche Begründungen; Portfoliosicht als „zweite Meinung“ zur Plausibilisierung.}
-\end{columns}
+    \pnote{1. ...}
+    \pnote{2. ...}
+    \pnote{... ...}
+
+  \end{columns}
 \end{frame}
 
+%--------------------------------
 \section{Problemstellung}
+%--------------------------------
 \begin{frame}{Problemstellung}
+  \begin{enumerate}
+    \item \textbf{Erklärungsdefizit in bestehenden Lösungen}
+      \begin{itemize}
+        \item Prozentempfehlungen ohne kontextspezifische Begründung (z.\,B. Cashflow-Margen, ESG, Makro-Faktoren).
+      \end{itemize}
+    \item \textbf{Portfolio-Dilemma}
+      \begin{itemize}
+        \item Zu geringe risikoadaptive Integration von Einzelanalysen; dynamische Korrelationen fehlen oft.
+      \end{itemize}
+    \item \textbf{Nutzerzentrierung \& Regulierung}
+      \begin{itemize}
+        \item Vertrauen, Nachvollziehbarkeit (z.\,B. MiFID-II-Transparenzgedanke); individuelle Ziele.
+      \end{itemize}
+    \item \textbf{Technische/operative Herausforderungen}
+      \begin{itemize}
+        \item Datenqualität/Aktualität, LLM-Konsistenz, Latenzen, Skalierung, Kosten.
+      \end{itemize}
+  \end{enumerate}
+  \vspace{0.2cm}
+  \arrowright{} \textbf{Ziel:} Transparentes, modular austauschbares System mit begründeten Einzel- \& Portfoliobewertungen.
 
-    \begin{enumerate}
-        \item \textbf{Erklärungsdefizit bei Einzelwert-Empfehlungen}
-        \begin{itemize}
-            \item K/V/H-Signale häufig ohne Kontext (z.\,B. Margen, ESG, Lieferkettenrisiken).
-            \item LLMs generieren plausible, aber teils inkonsistente Begründungen.
-        \end{itemize}
 
-        \item \textbf{Portfolio-Dilemma \& Nutzerzentrierung}
-        \begin{itemize}
-            \item Fehlende risikoadaptive \emph{Integration} von Einzelanalysen (Korrelationen, Diversifikation).
-            \item Unzureichende Ausrichtung an Zielen/Präferenzen \& Transparenzvorgaben.
-        \end{itemize}
-    \end{enumerate}
+  % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
+  % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
+  \pnote{1-X}
+  \pnote{1. ...}
+  \pnote{2. ...}
+  \pnote{... ...}
 
-    \arrowright \ Transparentes, reproduzierbares Assistenzsystem mit klaren Schnittstellen, das Signale, Begründungen und Portfoliosicht verknüpft.
-
-    \pnote{0-5}
-    \pnote{0. Problem dreiteilig: Intransparenz, Portfoliobezug, Regulatorik/Nutzerfokus.}
-    \pnote{Zeigen, dass Architektur diese Lücken gezielt adressiert.}
 \end{frame}
 
-\section{Ergebnisse}
-\begin{frame}{Ergebnisse}
-
-    \begin{alertblock}{Kernaussagen}
-        \begin{itemize}
-            \item Kopplung strukturierter Signale mit Begründungen ist technisch tragfähig.
-            \item Portfoliosicht unterstützt \emph{verständliche} Zweitbewertung und Rebalancing-Hinweise.
-            \item Modulare Architektur fördert Austauschbarkeit \& Reproduzierbarkeit.
-        \end{itemize}
-    \end{alertblock}
-
-    \begin{exampleblock}{Evaluation (Auszug)}
-        \begin{itemize}
-            \item \emph{Konsistenztests} der LLM-Ausgaben über Iterationen/Modelle.
-            \item \emph{Vergleich} der Tendenzen mit Analystenkonsens (orientierend, nicht normativ).
-            \item Backtesting: konzeptionell verortet, aus Umfangsgründen nicht durchgeführt.
-        \end{itemize}
-    \end{exampleblock}
-
-    \begin{extrablock}{Implikationen}
-        \begin{itemize}
-            \item Transparente Argumente erhöhen Validierbarkeit und Nutzervertrauen.
-            \item Grundlage für größere, unabhängige Realwelt-Validierungen \& A/B-Studien.
-        \end{itemize}
-    \end{extrablock}
-
-    \pnote{1-4}
-    \pnote{Wichtig: Transparenz \& Reproduzierbarkeit als übergreifende Qualitätsmerkmale.}
-\end{frame}
-
-\begin{frame}{Ergebnisse (Fortsetzung)}
-
-    \begin{block}{Portfoliosicht \& Rebalancing}
-        \begin{itemize}
-            \item Aggregation von Einzel-Empfehlungen zu risikoadaptiver Gesamtstrategie.
-            \item Korrelationen/Diversifikation berücksichtigt; Hinweise auf Zielabweichungen.
-        \end{itemize}
-    \end{block}
-
-    \begin{exampleblock}{Beispiel: Konsistenzprüfung}
-        \begin{itemize}
-            \item Mehrfachläufe gleicher Prompts; Variation nach Modell/Parameter sichtbar.
-            \item Maßnahmen: striktere Schemas (Pydantic), JSON-Extraktion, Prompt-Checks.
-        \end{itemize}
-    \end{exampleblock}
-
-    \begin{alertblock}{Limitationen der Evaluation}
-        \begin{itemize}
-            \item Keine Backtests im Prototypumfang; desk-basierte Verfahren dominieren.
-            \item LLM-Stochastik \& Datenaktualität bleiben kritische Faktoren.
-        \end{itemize}
-    \end{alertblock}
-
-    \pnote{1-X}
-    \pnote{Rahmen für weiterführende Tests skizzieren (Backtesting, Nutzerstudien).}
-\end{frame}
-
-\section{Technische Umsetzung}
-\begin{frame}{Technische Umsetzung}
-
-    \begin{columns}
-        \column{0.4\textwidth}
-            \begin{figure}
-                \includegraphics[scale=0.2]{assets/vereinfachte_systemarchitektur.jpg}
-            \end{figure}
-            \vspace*{-0.5cm}
-            \scalebox{.4}{Architekturübersicht (Quelle: Eigene Darstellung)}
-
-        \column{0.6\textwidth}
-        \begin{itemize}
-            \item \textbf{Backend (Flask):}
-            \begin{itemize}
-                \item HTTP/JSON-APIs; Orchestrierung von LLM \& Finanzdaten.
-            \end{itemize}
-
-            \item \textbf{LLM-Schicht (austauschbar):}
-            \begin{itemize}
-                \item Lokal via Ollama; optional externe Anbieter per API.
-                \item LangChain für Ketten/Tools; strikte JSON-Outputs (Pydantic).
-            \end{itemize}
-
-            \item \textbf{Finanzdaten:}
-            \begin{itemize}
-                \item yfinance/Finnhub; Kombination quant./qual. Faktoren.
-            \end{itemize}
-
-            \item \textbf{Frontend (leichtgewichtig):}
-            \begin{itemize}
-                \item HTML/Bootstrap/jQuery; asynchrone API-Calls; Chat-Interaktion.
-            \end{itemize}
-        \end{itemize}
-    \end{columns}
-
-    \pnote{0-4}
-    \pnote{Modularität = Austauschbarkeit (Modelle/Daten), Reproduzierbarkeit = klare Schnittstellen \& Logs.}
-\end{frame}
-
-\begin{frame}{Technische Umsetzung (Fortsetzung)}
-
-    \begin{block}{Prompts \& Schemata}
-        \begin{itemize}
-            \item Asset-Bewertungsprompt \& Portfolio-Zusammenfassungsprompt.
-            \item Strukturausgaben (JSON) mit Validierung zur Konsistenzsicherung.
-        \end{itemize}
-    \end{block}
-
-    \begin{exampleblock}{Entwicklungs- \& Betriebsaspekte}
-        \begin{itemize}
-            \item Iterative Verbesserung; Jupyter-Lab für Experimente.
-            \item Monitoring von Latenzen; Debugging-Tools; Deployment-Szenarien.
-        \end{itemize}
-    \end{exampleblock}
-
-    \pnote{1-4}
-    \pnote{Hervorheben: klare Projektstruktur, nachvollziehbare Artefakte, Erweiterbarkeit.}
-\end{frame}
-
-\section{Zusammenfassung, Vorteile und Grenzen}
-\begin{frame}{Zusammenfassung, Vorteile und Grenzen der Arbeit}
-
+%--------------------------------
+\section{Vorgehen und Methodik}
+%--------------------------------
+\begin{frame}{Vorgehen und Methodik (DSR)}
+  \begin{columns}
+    \column{0.55\textwidth}
+    \textbf{Design Science Research (DSR)}
     \begin{itemize}
-        \item \textbf{Grundprinzipien:}
-        \begin{itemize}
-            \item Verknüpfung aus \emph{quantitativen Signalen} und \emph{sprachlichen Erklärungen}.
-            \item Risikoadaptive \emph{Portfoliosicht} \& Rebalancing-Empfehlungen.
-            \item \emph{Modular} \& \emph{reproduzierbar} durch klare Schnittstellen.
-        \end{itemize}
-
-        \item \textbf{Vorteile:}
-        \begin{itemize}
-            \item Höhere Nachvollziehbarkeit, bessere Plausibilisierung bestehender Einschätzungen.
-            \item Austauschbare LLM- \& Daten-Layer, wissenschaftlich saubere Evaluationspfade.
-            \item Interaktiver Chat für Nutzerfragen \(\rightarrow\) Nutzerzentrierung.
-        \end{itemize}
-
-        \item \textbf{Grenzen:}
-        \begin{itemize}
-            \item Keine Backtests im Prototyp; LLM-Stochastik \& Datenqualität kritisch.
-            \item Noch ausstehende \emph{großskalige} Realwelt-Validierungen \& Nutzerstudien.
-        \end{itemize}
+      \item Von Problemidentifikation über Konstruktion/Entwicklung zur Evaluation.
+      \item Iterative Prototypisierung mit klaren Schnittstellen und Reproduzierbarkeit.
+    \end{itemize}
+    \vspace{0.2cm}
+    \textbf{Technologieauswahl (Nutzwertanalysen)}
+    \begin{itemize}
+      \item Auswahl \emph{LLM-Anbindung} und \emph{Finanzdaten}-Provider anhand Kriterienkatalogen.
+      \item Ziel: Austauschbarkeit, Nachvollziehbarkeit, Betriebspraxis.
+    \end{itemize}
+    \column{0.45\textwidth}
+    \textbf{Evaluationsdesign}
+    \begin{itemize}
+      \item Konsistenztests der LLM-Ausgaben (Mehrfach-Iterationen).
+      \item Abgleich mit Analystenkonsens (Trend/Richtung als Orientierung).
+      \item Backtesting: \emph{konzeptionell eingeordnet}, nicht durchgeführt (Scope).
     \end{itemize}
 
-    \pnote{1-4}
-    \pnote{Takeaway: tragfähiges Konzept mit klaren nächsten Schritten (Backtesting, A/B-Tests, Skalierung).}
+
+    % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
+    % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
+    \pnote{1-X}
+    \pnote{1. ...}
+    \pnote{2. ...}
+    \pnote{... ...}
+
+  \end{columns}
 \end{frame}
 
-\section{Referenzen}
-\begin{frame}{Referenzen}
+%--------------------------------
+\section{Technische Umsetzung}
+%--------------------------------
+\begin{frame}{Technische Umsetzung – Architektur \& Komponenten}
+  \begin{columns}
 
-    \footnotesize{
-    \begin{thebibliography}{99}
+    \column{0.55\textwidth}
+    \begin{figure}
+        \includegraphics[width=\linewidth]{assets/vereinfachte_systemarchitektur.jpg}
+        \caption{Architekturübersicht (Quelle: Eigene Darstellung)}
+    \end{figure}
+
+    \column{0.45\textwidth}
+
+    \textbf{Modulare Architektur}
+    \begin{itemize}
+      \item Backend (Python/Flask) – API \& Logik
+      \item LLM-Layer austauschbar (lokal / Cloud)
+      \item Finanzdaten aus externen APIs
+      \item Frontend: Web-UI + Chat
+    \end{itemize}
+
+    \vspace{0.2cm}
+    \textbf{Strukturierte KI-Ausgaben}
+    \begin{itemize}
+      \item JSON-Schemas für Bewertungen \& Portfolio
+    \end{itemize}
+
+    \vspace{0.2cm}
+    \textbf{Qualität \& Entwicklung}
+    \begin{itemize}
+      \item Prompt-Orchestrierung + Validierung
+      \item Fokus: Reproduzierbarkeit \& Transparenz
+    \end{itemize}
+
+    % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
+    % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
+    \pnote{1-X}
+    \pnote{1. ...}
+    \pnote{2. ...}
+    \pnote{... ...}
+
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Technische Umsetzung – Datenfluss}
+  \begin{block}{Pipeline-Skizze}
+    \begin{itemize}
+      \item \textbf{Input:} Portfolio \& Nutzerziele \textrightarrow{} Datenabruf (Markt/Fundamentals/News).
+      \item \textbf{LLM-Orchestrierung:} Strukturierte Signale + Prompting \textrightarrow{} \emph{begründete} Einzelbewertungen.
+      \item \textbf{Aggregation:} Risikoadaptive Portfoliosicht \textrightarrow{} Rebalancing-Hinweise.
+      \item \textbf{UI:} Visualisierung + Chat für Rückfragen/Erklärungen.
+    \end{itemize}
+  \end{block}
+  \begin{exampleblock}{Qualitätssicherung}
+    \begin{itemize}
+      \item JSON-Validierung (Pydantic), Konsistenzprüfungen, Logging/Monitoring.
+    \end{itemize}
+  \end{exampleblock}
+
+    % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
+    % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
+    \pnote{1-X}
+    \pnote{1. ...}
+    \pnote{2. ...}
+    \pnote{... ...}
+
+\end{frame}
+
+%--------------------------------
+\section{Ergebnisse}
+%--------------------------------
+\begin{frame}{Ergebnisse – Kurzüberblick}
+  \begin{alertblock}{Machbarkeit \& Nutzen}
+    \begin{itemize}
+      \item Kopplung strukturierter Signale mit natürlichsprachlichen Begründungen ist technisch tragfähig.
+      \item Portfoliosicht unterstützt \emph{unabhängige Zweitbewertung} vorhandener Einschätzungen.
+    \end{itemize}
+  \end{alertblock}
+  \begin{exampleblock}{Evaluation}
+    \begin{itemize}
+      \item Konsistenztests: Mehrfachläufe, Vergleich numerischer Ausgaben je Asset/Modell.
+      \item Abgleich mit Analystenkonsens: Richtung/Trend als Orientierung, kein Absolutmaß.
+    \end{itemize}
+  \end{exampleblock}
+  \begin{block}{Nicht durchgeführt (Scope)}
+    \begin{itemize}
+      \item Backtesting nur konzeptionell eingeordnet; größere Feldstudien stehen aus.
+    \end{itemize}
+  \end{block}
+
+    % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
+    % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
+    \pnote{1-X}
+    \pnote{1. ...}
+    \pnote{2. ...}
+    \pnote{... ...}
+
+\end{frame}
+
+\begin{frame}{Ergebnisse – Implikationen}
+  \begin{block}{Beitrag}
+    \begin{itemize}
+      \item Konsistentes Vorgehensmodell + modularer Prototyp als belastbare Basis für Erweiterungen/Piloten.
+      \item Erhöhte Nachvollziehbarkeit durch klare Schnittstellen, strukturierte Ausgaben, UI-Dialog.
+    \end{itemize}
+  \end{block}
+  \begin{alertblock}{Risiken/Beobachtungen}
+    \begin{itemize}
+      \item LLM-Stochastik erfordert Konsistenz-Checks \& Parameterdisziplin.
+      \item Datenqualität/Aktualität wesentlich für Vertrauen und Reproduzierbarkeit.
+    \end{itemize}
+  \end{alertblock}
+
+    % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
+    % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
+    \pnote{1-X}
+    \pnote{1. ...}
+    \pnote{2. ...}
+    \pnote{... ...}
+
+\end{frame}
+
+%--------------------------------
+\section{Fazit, Reflexion und Ausblick}
+%--------------------------------
+\begin{frame}{Fazit, Reflexion und Ausblick}
+  \begin{itemize}
+    \item \textbf{Grundprinzipien}
+      \begin{itemize}
+        \item Erklärungsorientierte Entscheidungsassistenz statt Blackbox \textrightarrow{} Vertrauen \& Steuerbarkeit.
+      \end{itemize}
+    \item \textbf{Ergebnisse}
+      \begin{itemize}
+        \item Funktionsfähiger End-to-End-Prototyp mit Interaktions-UI \& Chat.
+        \item Transparenz (begründete Empfehlungen), Austauschbarkeit (Module), Reproduzierbarkeit (JSON/Schemata).
+      \end{itemize}
+    \item \textbf{Krtische Reflexion}
+      \begin{itemize}
+        \item Keine großskalige, unabhängige Validierung.
+        \item Betriebs-Themen weitestgehend ununtersucht (Latenz/Kosten/Compliance).
+      \end{itemize}
+    \item \textbf{Aublick}
+    \begin{itemize}
+      \item Systematische Backtests \& A/B-Studien mit Nutzern.
+      \item RAG/Pipeline für aktuelle, qualitativ geprüfte Nachrichten/Research.
+      \item Robustheit: Konsistenzmetriken, Prompt-Policies, Model-Governance.
+      \item Betrieb: Caching, Kosten-/Latenzoptimierung, Observability, Compliance.
+      \end{itemize}
+  \end{itemize}
+
+    % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
+    % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
+    \pnote{1-X}
+    \pnote{1. ...}
+    \pnote{2. ...}
+    \pnote{... ...}
+
+\end{frame}
+
+%--------------------------------
+\section{Referenzen}
+%--------------------------------
+\begin{frame}{Referenzen}
+  \footnotesize{
+  \begin{thebibliography}{99}
 
         \bibitem[Bremenkamp, 2025]{bremenkamp2025}
         J. Bremenkamp (2025).
@@ -412,16 +492,26 @@ https://jasper.bremenkamp.de
         zur quantitativen Portfoliooptimierung im Wertpapierhandel.}
         Masterarbeit, IU Internationale Hochschule.
 
-        % ggf noch mehr Quellen
+  \end{thebibliography}
+  }
 
-    \end{thebibliography}
-    }
+    % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
+    % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
+    \pnote{1-X}
+    \pnote{1. ...}
+    \pnote{2. ...}
+    \pnote{... ...}
 
-    \pnote{1-2}
-    \pnote{Aus Zeitgründen nur repräsentative Quellen. Danke für die Aufmerksamkeit!}
+\end{frame}
+
+%--------------------------------
+\begin{frame}
+  \centering \Large Fragen?
+  \pnote{Vielen Dank! Ich freue mich auf Ihre Fragen.}
 \end{frame}
 
 \end{document}
+
 
 % To-Dos:
 % 15min gut erreichbar
