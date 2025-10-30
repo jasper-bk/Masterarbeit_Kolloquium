@@ -185,8 +185,11 @@ https://jasper.bremenkamp.de
 \begin{frame}
     \titlepage % Print the title page as the first slide
 
-    \pnote{Herzlich willkommen zur Präsentation meiner Masterarbeit [Titel].}
-    \pnote{Ich bin Jasper Bremenkamp, Datum: 31. Oktober 2025.}
+    \pnote{=======================================================================================================>}
+    \pnote{Hallo und herzlich willkommen zur Präsentation }
+    \pnote{meiner Masterarbeit mit dem Titel ...}
+    \pnote{Ich, Jasper Bremenkamp, stelle euch das Thema heute}
+    \pnote{am  31. Oktober 2025 vor}
 \end{frame}
 
 \begin{frame}
@@ -195,12 +198,15 @@ https://jasper.bremenkamp.de
 
   % Notes hier noch anpassen
   \pnote{0-5}
-  \pnote{0. Agenda: Einleitung, Problemstellung, Ergebnisse, technische Umsetzung, Zusammenfassung mit Vorteilen \& Grenzen.}
-  \pnote{1. Warum transparente Entscheidungsbegründung im Wertpapierhandel wichtig ist und Zielbild der Arbeit.}
-  \pnote{2. Welche Lücken heutige Systeme haben (Erklärungsdefizit, Portfolio-Integration, Regulatorik).}
-  \pnote{3. Was der Prototyp zeigt: Kopplung von Signalen \& Begründungen, Portfoliosicht, Evaluation.}
-  \pnote{4. Wie die Lösung gebaut ist: modular, austauschbare LLM-Schicht, Daten, Frontend.}
-  \pnote{5. Takeaways: Nutzen, aber auch Grenzen \& Ausblick.}
+  \pnote{0.1 Kommen wir zuallerst zur Agenda}
+  \pnote{1. Wie üblich starten wir mit der  Einleitung. }
+  \pnote{1.1. Hier gehe ich auf Motivation und Zielbild ein, aber grenze schon ab}
+  \pnote{2. Dann schauen wir nochmal genauer auf die Problemstellung. }
+  \pnote{2.1 Die ich auch bereits in der Einleitung anreiße.}
+  \pnote{3. Anschließend erkläre ich kurz das Vorgehen und die eingesetzten Methodiken.}.
+  \pnote{4. Darauffolgend die technische Implementierung sowie die Ergebnisse.}
+  \pnote{4.1. Dazu gehören das Artefakt bzw Projekt aber auch die Analyse}
+  \pnote{5. Und zu guterletzt: Fazit, Reflexion und Ausblick}
 \end{frame}
 
 %----------------------------------------------------------------------------------------
@@ -239,10 +245,26 @@ https://jasper.bremenkamp.de
 
   % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
   % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
-  \pnote{1-X}
-  \pnote{1. ...}
-  \pnote{2. ...}
-  \pnote{... ...}
+  \pnote{=======================================================================================================>}
+  \pnote{0-5}
+  \pnote{1. Was motiviert die Arbeit?}
+  \pnote{1.1 Viele Anleger oder Nutzer im allgemeinen wollen von KI oder oftmals nur Automatisierung }
+  \pnote{profitieren. }
+  \pnote{1.2 Viele wollen, können und sollten dieser nicht blind vertrauen.}
+  \pnote{1.2. Transparenz ist oftmals eine Kernanforderung.}
+  \pnote{----}
+  \pnote{2. So richtet sich die Forschungsfrage der Arbeit auch nach Transparenz}
+  \pnote{ aber auch nach den individuellen Anlagezielen des Nutzers aus }
+  \pnote{3. Die Idee: KI liefert quantitative Empfehlungen }
+  \pnote{samt verständlichen Begründung im Portfolio-Kontext und erlaubt zudem noch Interaktion.}
+  \pnote{----}
+  \pnote{4. Der Fokus liegt bewusst auf der unterstützende Rolle.}
+  \pnote{4.1. Der Nutzer behält die Verantwortung, keine automatisierte Orderlogik.}
+  \pnote{4.2. Es ist ganz bewusst kein Trading-Bot und auch die Prognosegenauigkeit }
+  \pnote{der Aussagen steht nur indirekt im Fokus.}
+  \pnote{----}
+  \pnote{5. Auf den Screenshot gehe ich noch nicht näher ein, dass ist nur ein Vorgeschmack für die späteren Folien }
+
 
 \end{frame}
 
@@ -253,31 +275,51 @@ https://jasper.bremenkamp.de
   \begin{enumerate}
     \item \textbf{Erklärungsdefizit in bestehenden Lösungen}
       \begin{itemize}
-        \item Prozentempfehlungen ohne kontextspezifische Begründung (z.\,B. Cashflow-Margen, ESG, Makro-Faktoren).
+        \item Prozentempfehlungen ohne kontextspezifische Begründung (z.\,B. Kennzahlen, ESG, Makro-Faktoren).
+        \item Wenig Einlfuss auf Aktionen und Anbieterziele vor Nutzerzielen.
       \end{itemize}
-    \item \textbf{Portfolio-Dilemma}
+    \item \textbf{Portfoliokontext}
       \begin{itemize}
-        \item Zu geringe risikoadaptive Integration von Einzelanalysen; dynamische Korrelationen fehlen oft.
+        \item Zu geringe Integration von Einzelanalysen im Gesamtkontext. Gesamtheitlicher Blick fehlt oft.
       \end{itemize}
     \item \textbf{Nutzerzentrierung \& Regulierung}
       \begin{itemize}
-        \item Vertrauen, Nachvollziehbarkeit (z.\,B. MiFID-II-Transparenzgedanke); individuelle Ziele.
-      \end{itemize}
-    \item \textbf{Technische/operative Herausforderungen}
-      \begin{itemize}
-        \item Datenqualität/Aktualität, LLM-Konsistenz, Latenzen, Skalierung, Kosten.
+        \item Vertrauen, Nachvollziehbarkeit (z.\,B. MiFID-II-Transparenzgedanke).
+        \item Unzureichende Nutzerzentrierung und Verantwortung.
       \end{itemize}
   \end{enumerate}
   \vspace{0.2cm}
-  \arrowright{} \textbf{Ziel:} Transparentes, modular austauschbares System mit begründeten Einzel- \& Portfoliobewertungen.
+  \arrowright{} \textbf{Ziel:} Transparentes, modulares System mit begründeten Einzel- \& Portfoliobewertungen als Assistenz.
 
 
   % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
   % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
-  \pnote{1-X}
-  \pnote{1. ...}
-  \pnote{2. ...}
-  \pnote{... ...}
+  \pnote{=======================================================================================================>}
+  \pnote{0-6}
+  \pnote{1. Schauen wir uns die Problemstellung jetzt genauer an.}
+  \pnote{2. Da draußen bzw. am Markt gibt es viele Tools.}
+  \pnote{2.1 Die allermeisten proprietär. Sprich perse nicht transparent. }
+  \pnote{2.2. Entweder bereits in der Bedienung nicht der Öffentlichkeit zugänglich oder falls doch, dann}
+  \pnote{dann nur auf eigenen Plattformen mit einer für den Anbieter verbundenen Profitabsicht}
+  \pnote{3. Damit mangelt es an Vertrauen und es kann auch nur eingeschränkt nachvollzogen werden}
+  \pnote{----}
+  \pnote{3.1. Robo-Advisor sind ein hervorragendes Beispiel. Zwar kein Assistent, sondern autonom agierend}
+  \pnote{3.2. Begründungen liefert das System zumeist nur kurz und die eigene Verantwortung tritt man ab}
+  \pnote{4. Ziel ist es die Verantwortung zu behalten}
+  \pnote{2.4. Hier steht Kontrolle im Fokus}
+  \pnote{----}
+  \pnote{3. Zudem haben viele andere bestehende Tools wie z. B. Aktienscreener nur die Einzelsicht und}
+  \pnote{keinen Gesamtkontext.}
+  \pnote{4. Um hilfreich zu sein braucht es individuell abgestimmte Empfehlungen, nicht generische }
+  \pnote{Markteinschätzungen.}
+  \pnote{5. Darüber hinaus gibt es viele Regulatorien wie z. B: MiFID, sodass Nachvollziehbarkeit umso wichtiger wird}
+  \pnote{6. KI-Modelle erzeugen plausible Texte -- aber ohne Rahmen oft unstrukturiert und inkonsistent.}
+  \pnote{----}
+  \pnote{7. Ziel ist ein Transparentes, modulares System, welche Bewertungen begründen kann,}
+  \pnote{um effektiv als Assistent zu unterstützen}
+  \pnote{8. Das Projekt schafft den Rahmen und der Nutzer bleibt auch weiterhin am Steuer}
+
+
 
 \end{frame}
 
@@ -310,10 +352,27 @@ https://jasper.bremenkamp.de
 
   % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
   % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
-  \pnote{1-X}
-  \pnote{1. ...}
-  \pnote{2. ...}
-  \pnote{... ...}
+  \pnote{=======================================================================================================>}
+  \pnote{0-10}
+  \pnote{0. Nach dem wir die Problemstellung ausreichend beleuchtet haben, kommen wir zum Vorgehen und der Methodik}
+  \pnote{----}
+  \pnote{1. Vorgegangen wurde nach Design Science Research}
+  \pnote{2. Iteratives Vorgehen über Problem zur Konstruktion bishin zur Evaluation}
+  \pnote{2. Strukturiertes Vorgehen sichert wissenschaftliche Nachvollziehbarkeit.}
+  \pnote{----}
+  \pnote{3. Zudem wurde die Nutzwertanalyse bzw Entscheidungsmatrizen eingesetzt.}
+  \pnote{3.1. Technologieentscheidungen werden begründet.}
+  \pnote{3.2. Keine Auswahl nach Bauchgefühl.}
+  \pnote{----}
+  \pnote{4. Das Vorgehen in der Evaluation war besonders herausfordernd. }
+  \pnote{5. Die Herausforderung lag im Ausmachen der richtigen Evaluationen.}
+  \pnote{5.1. Entweder zu umfangreich oder nicht praktikabel realisirbar}
+  \pnote{6. Sow wurde auf Konsistenztests und Analystenkonsens zurückgegriffen.}
+  \pnote{7. Konsistenztests prüfen Stabilität bei LLM-Ausgaben.}
+  \pnote{8. Und der Analystenkonsens dient als Plausibilitätsanker, nicht als Wahrheitsmaß.}
+  \pnote{8.1 Denn auch Analysten können falsch liegen. Es geht eher um die allgemeine Tendenz}
+  \pnote{9. Erweiterte Verfahren wurden konzeptionell eingeordnet aber nicht durchgeführt}
+  \pnote{10. Und nun zur nächsten Folie, der Umsetzung.}
 
 \end{frame}
 
@@ -335,14 +394,8 @@ https://jasper.bremenkamp.de
     \begin{itemize}
       \item Backend (Python/Flask) – API \& Logik
       \item LLM-Layer austauschbar (lokal / Cloud)
-      \item Finanzdaten aus externen APIs
+      \item Finanzdaten und News aus externen APIs
       \item Frontend: Web-UI + Chat
-    \end{itemize}
-
-    \vspace{0.2cm}
-    \textbf{Strukturierte KI-Ausgaben}
-    \begin{itemize}
-      \item JSON-Schemas für Bewertungen \& Portfolio
     \end{itemize}
 
     \vspace{0.2cm}
@@ -355,10 +408,26 @@ https://jasper.bremenkamp.de
 
   % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
   % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
-  \pnote{1-X}
-  \pnote{1. ...}
-  \pnote{2. ...}
-  \pnote{... ...}
+  \pnote{0-6}
+  \pnote{=======================================================================================================>}
+  \pnote{0. Bei der Technische Umsetzung starten wir mit der Architektur.}
+  \pnote{1. Architektur trennt Datenbeschaffung, Modelllogik, Ausgabe-Struktur und UI.}
+  \pnote{2. LLM-Austauschbarkeit ist gegeben über LangChain (einer Python-Bibliothek),}
+  \pnote{die mit den gängigen Providern funktioniert und viele Funktionen mit sich bringt wie z. B. Templates.}
+  \pnote{----}
+  \pnote{2.1. Das ist wichtig wegen der Schnelllebigkeit der Entwicklung am Markt.}
+  \pnote{2.2. Der Code muss nicht direkt an den Anbieter und dessen Änderungen angepasst werden sondern.}
+  \pnote{2.2 nur an die Bibliothek, das schafft zudem auch mehr Flexibilät und Kontrolle}
+  \pnote{----}
+  \pnote{3. Zudem gibt es JSON-Schemas. Erzeugt und validiert mit Pydantic.}
+  \pnote{3.1. Diese erzwingen klare Struktur und verhindern LLM-Halluzinationen.}
+  \pnote{----}
+  \pnote{3.2. Bspw kommt es relativ häufig noch vor, dass das Modell keine 100 Prozent hat.}
+  \pnote{4. Die UI ist relativ schlicht, um Fokus auf Entscheidungslogik zu legen.}
+  \pnote{5. Ansatz erleichtert Erweiterbarkeit, z.B. durch zusätzliche Module.}
+  \pnote{----}
+  \pnote{6. Als nächstes gucken wir uns dann den Datenfluss an}
+
 
 \end{frame}
 
@@ -385,16 +454,29 @@ https://jasper.bremenkamp.de
         \caption{Flow-Chart allgemeiner Ablauf (Quelle: Eigene Darstellung)}
     \end{figure}
 
-
-
   \end{columns}
 
   % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
   % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
-  \pnote{1-X}
-  \pnote{1. ...}
-  \pnote{2. ...}
-  \pnote{... ...}
+  \pnote{=======================================================================================================>}
+  \pnote{0-8}
+  \pnote{1. Rechts haben wir einmal einen Flow-Chart der den Ablauf der Hauptkomponente zeigt}
+  \pnote{1. Zuallerst werden Objekt und Klasse initialisiert}
+  \pnote{2. Anschließend wird das Portfolio geladen.}
+  \pnote{----}
+  \pnote{3. Jedes Asset bzw. jedes Wertpapier wird dann in einer Schleife vearbeitet}
+  \pnote{3.1. Dabei werden quantitative Daten wie Kennzahlen, aber auch quantitative Daten wie News,}
+  \pnote{sowie der Portfoliokontext einbezogenund über einen spezielles Prompt-Template bewertet und gespeichert}
+  \pnote{----}
+  \pnote{4. Und am Ende der Schleife wird das Portfolio gesamtheitlich betrachtet und bewertet.}
+  \pnote{5. Kaufen/Verkaufen/Halten sowie die Urgency sind aber nur Durschnittswerte.}
+  \pnote{6. Lediglich Erklärungen und Empfehlung werden für das Gesamtportfolio generiert.}
+  \pnote{----}
+  \pnote{7. Im Anschluss an die Hauptlogik stehen Visualisierung und Chat für Rückfragen und spezifische}
+  \pnote{Erklärungen bereit}
+  \pnote{8. Und jetzt springen wir zur eigentlichen Anwendung. Ursprünglich hatte ich über eine Live-Demo nachgedacht}
+  \pnote{8.1. Aber das Risiko wollte ich meiden. Also bleiben wir bei Screenshots}
+
 
 \end{frame}
 
@@ -412,11 +494,22 @@ https://jasper.bremenkamp.de
 
   % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
   % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
-  \pnote{1-X}
-  \pnote{1. ...}
-  \pnote{2. ...}
-  \pnote{... ...}
-
+  \pnote{=======================================================================================================>}
+  \pnote{0-4}
+  \pnote{0. Ich werde jetzt nicht auf jedes einzelne Detail eingehen.}
+  \pnote{0.1. Aber es war mir wichtig meine Artefakt auch mal zu zeigen.}
+  \pnote{0.2. Da haben wir zuallerst mal die Gesamtübersicht.}
+  \pnote{----}
+  \pnote{1. Die Oberfläche zeigt das Gesamtportfolio sowie Empfehlungen kompakt.}
+  \pnote{1.1 Kaufen/Halten/Verkaufen sind hier nur der Durschnitt der Einzelwerte}
+  \pnote{und sind im Tortendiagramm visualisiert}
+  \pnote{1.2 Die Dringlichkeit ist ebenfalls gemittelt und wird noch als Ampel angezeigt.}
+  \pnote{1.3 Jedes Drittel von 100\% ist eine Farbe}
+  \pnote{----}
+  \pnote{2. Im Prinzip werden auf der Gesamtübersicht nur generierter Text gezeigt und eben die Zahlen aggregiert}
+  \pnote{----}
+  \pnote{3. Ziel: Ein guter Überblick über die Gesamtsituation mit der Möglichkeit Wertpapiere anhand ihrer Prio}
+  \pnote{auszuwählen}
 \end{frame}
 
 
@@ -429,10 +522,11 @@ https://jasper.bremenkamp.de
 
   % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
   % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
-  \pnote{1-X}
-  \pnote{1. ...}
-  \pnote{2. ...}
-  \pnote{... ...}
+  \pnote{0-4}
+  \pnote{1. Nutzer definiert Risikoprofil und Anlageziele.}
+  \pnote{2. Personalisierung ist wichtig für realen Mehrwert der KI.}
+  \pnote{3. Unterschied zu Standard-Finanztools: erklärbare Optimierung statt starrer Profile.}
+  \pnote{4. Grundlage für kundenzentrierte KI-Assistenz.}
 
 \end{frame}
 
@@ -446,10 +540,13 @@ https://jasper.bremenkamp.de
 
   % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
   % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
-  \pnote{1-X}
-  \pnote{1. ...}
-  \pnote{2. ...}
-  \pnote{... ...}
+  \pnote{0-5}
+  \pnote{1. Detailanalyse inkl. Prozentvorschlag und Textbegründung.}
+  \pnote{2. Chat ermöglicht echte Interaktion statt Einweg-Output.}
+  \pnote{3. Nutzer kann Modelle befragen: Erkläre mir das Risiko genauer.}
+  \pnote{4. Transparenz in der Argumentation erzeugt Vertrauen.}
+  \pnote{5. Werkzeugcharakter statt Automat — Mensch bleibt Entscheider.}
+
 
 \end{frame}
 
@@ -475,10 +572,14 @@ https://jasper.bremenkamp.de
 
   % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
   % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
-  \pnote{1-X}
-  \pnote{1. ...}
-  \pnote{2. ...}
-  \pnote{... ...}
+  \pnote{0-6}
+  \pnote{1. Konzept technisch umsetzbar und funktionierend.}
+  \pnote{2. Konsistenztests zeigen stabile Empfehlungen bei gleichem Kontext.}
+  \pnote{3. KI argumentiert plausibel entlang fundamentaler Kennzahlen.}
+  \pnote{4. Analystentrends grob getroffen — qualitatives Validationssignal.}
+  \pnote{5. Kein Ziel: outperformen, sondern erklären und strukturieren.}
+  \pnote{6. Limitationen bewusst gewählt, Fokus auf Nutzbarkeit \& Transparenz.}
+
 
 \end{frame}
 
@@ -498,17 +599,22 @@ https://jasper.bremenkamp.de
 
   % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
   % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
-  \pnote{1-X}
-  \pnote{1. ...}
-  \pnote{2. ...}
-  \pnote{... ...}
+  \pnote{0-7}
+  \pnote{1. Ziel erreicht: transparente, strukturierte KI-Portfolioassistenz.}
+  \pnote{2. Beitrag: nachvollziehbare Investmentargumentation statt Blackbox-ML.}
+  \pnote{3. Architektur ist flexibel und marktnah konzipiert.}
+  \pnote{4. Limitationen bewusst: keine vollautomatische Trading-Engine.}
+  \pnote{5. Zukunft: Backtests, größere Nutzerstudien, Live-News-RAG.}
+  \pnote{6. Relevanz steigt mit KI-Regulierung und Anleger-Digitalisierung.}
+  \pnote{7. System bereit für Pilotierung im FinTech-/Edu-Kontext.}
+
 
 \end{frame}
 
 %--------------------------------
-\section{Fazit, Reflexion und Ausblick}
+\section{Fazit}
 %--------------------------------
-\begin{frame}{Fazit, Reflexion und Ausblick}
+\begin{frame}{Fazit}
   \begin{itemize}
     \item \textbf{Grundprinzipien}
       \begin{itemize}
@@ -535,10 +641,15 @@ https://jasper.bremenkamp.de
 
   % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
   % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
-  \pnote{1-X}
-  \pnote{1. ...}
-  \pnote{2. ...}
-  \pnote{... ...}
+  \pnote{0-7}
+  \pnote{1. Ziel erreicht: transparente, strukturierte KI-Portfolioassistenz.}
+  \pnote{2. Beitrag: nachvollziehbare Investmentargumentation statt Blackbox-ML.}
+  \pnote{3. Architektur ist flexibel und marktnah konzipiert.}
+  \pnote{4. Limitationen bewusst: keine vollautomatische Trading-Engine.}
+  \pnote{5. Zukunft: Backtests, größere Nutzerstudien, Live-News-RAG.}
+  \pnote{6. Relevanz steigt mit KI-Regulierung und Anleger-Digitalisierung.}
+  \pnote{7. System bereit für Pilotierung im FinTech-/Edu-Kontext.}
+
 
 \end{frame}
 
@@ -560,10 +671,8 @@ https://jasper.bremenkamp.de
 
   % Notes am Ende jeder Folie. Nummerieren mit 0 - X (X = letzte Note). Bsp 1-5
   % Das was man Vorlesen kann ohne es von der Folie abzulesen. Nicht 1 zu 1 Inhalts Wiedergabe
-  \pnote{1-X}
-  \pnote{1. ...}
-  \pnote{2. ...}
-  \pnote{... ...}
+  \pnote{1-1}
+  \pnote{1. Sämtliche Inhalte der Folien stammen natürlich aus der Masterarbeit}
 
 \end{frame}
 
@@ -577,9 +686,5 @@ https://jasper.bremenkamp.de
 
 
 % To-Dos:
-% 15min gut erreichbar
-% Notizen weniger stark als Duplikat zur Folie
-    % Bezug zur Folie soll existieren, abes es soll nicht einfach runter gebetet werden.
-    % Unabhängiges Vortragen mit erkennbarem Bezug zu Folien
-        % vorher: schlechte Überleitung, wenn man über alle Punkte geht
-        % auf Punkte nich zu genau eingehen und sie einfach als solche stehen lassen
+  % 15min gut erreichbar
+  % Notizen noch vervollständigen und Potentielle Fragen bereits ausdenken und vorbereiten
